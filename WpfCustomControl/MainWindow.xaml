@@ -26,6 +26,8 @@
             <local:Spinner/>
             <!--<local:ExpanderWithImage/>-->
             <local:TextBoxHint Hint="Filter" AcceptsReturn="True"/>
+            <local:TextBoxHint/>
+            <TextBox/>
         </StackPanel>
     </Grid>
 </Window>
