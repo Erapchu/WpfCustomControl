@@ -1,0 +1,31 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfCustomControl"
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Class="WpfCustomControl.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+    <Grid>
+        <StackPanel>
+            <local:ComboBoxWithButton ItemsSource="{Binding Collection}">
+                <!--AdditionalButtonContent="Teeeext"
+                AdditionalButtonCommand="{Binding SomeCommand}"
+                ItemsSource="{Binding Collection}">-->
+                <local:ComboBoxWithButton.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding .}"/>
+                    </DataTemplate>
+                </local:ComboBoxWithButton.ItemTemplate>
+                <local:ComboBoxWithButton.AdditionalControl>
+                    <Button Content="Check" Command="{Binding SomeCommand}"/>
+                </local:ComboBoxWithButton.AdditionalControl>
+            </local:ComboBoxWithButton>
+            <local:Spinner/>
+            <!--<local:ExpanderWithImage/>-->
+            <local:TextBoxHint Hint="Filter" AcceptsReturn="True"/>
+        </StackPanel>
+    </Grid>
+</Window>
