@@ -25,10 +25,21 @@ namespace WpfCustomControl
             InitializeComponent();
         }
 
+        /* !You may use properties or static methods
         public string Hint
         {
             get { return (string)GetValue(HintProperty); }
             set { SetValue(HintProperty, value); }
+        }*/
+
+        public static string GetHint(DependencyObject d)
+        {
+            return (string)d.GetValue(HintProperty);
+        }
+
+        public static void SetHint(DependencyObject d, string value)
+        {
+            d.SetValue(HintProperty, value);
         }
 
         public static readonly DependencyProperty HintProperty =
