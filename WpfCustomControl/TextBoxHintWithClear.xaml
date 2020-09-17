@@ -1,0 +1,69 @@
+﻿<TextBox 
+    x:Class="WpfCustomControl.TextBoxHintWithClear"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:WpfCustomControl"
+    mc:Ignorable="d"
+    xmlns:converters="clr-namespace:WpfCustomControl.Converters"
+    d:DesignHeight="26" d:DesignWidth="300">
+    <TextBox.Resources>
+        <converters:TextFieldClearButtonVisibilityConverter x:Key="ClearTextConverter"/>
+        <converters:EmptyTextConverter x:Key="EmptyTextConverter"/>
+    </TextBox.Resources>
+    <TextBox.Template>
+        <ControlTemplate TargetType="{x:Type TextBox}">
+            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <TextBlock 
+                            x:Name="HintTextBlock"
+                            FontStyle="Italic" 
+                            Foreground="Black" 
+                            Opacity="0.5" 
+                            FontSize="12"
+                            Visibility="Collapsed"
+                            Margin="3 0 0 0"
+                            Text="{Binding Hint, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                        <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                    </Grid>
+                    <Button 
+                        x:Name="PART_ClearButton"
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        Width="20">
+                        <Button.Visibility>
+                            <MultiBinding Converter="{StaticResource ClearTextConverter}">
+                                <Binding Path="Text" RelativeSource="{RelativeSource AncestorType=local:TextBoxHintWithClear}" Converter="{StaticResource EmptyTextConverter}" />
+                                <Binding Path="HasClearButton" RelativeSource="{RelativeSource TemplatedParent}" />
+                            </MultiBinding>
+                        </Button.Visibility>
+                    </Button>
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" TargetName="border" Value="#FF7EB4EA"/>
+                </Trigger>
+                <Trigger Property="IsKeyboardFocused" Value="True">
+                    <Setter Property="BorderBrush" TargetName="border" Value="#FF569DE5"/>
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsKeyboardFocused" Value="false"/>
+                        <Condition Property="Text" Value=""/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Visibility" TargetName="HintTextBlock" Value="Visible"/>
+                </MultiTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </TextBox.Template>
+</TextBox>

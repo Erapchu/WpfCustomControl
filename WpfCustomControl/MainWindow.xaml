@@ -25,9 +25,10 @@
             </local:ComboBoxWithButton>
             <local:Spinner/>
             <!--<local:ExpanderWithImage/>-->
-            <local:TextBoxHint Hint="Filter" AcceptsReturn="True"/>
-            <local:TextBoxHint/>
             <TextBox/>
+            <local:TextBoxHint/>
+            <local:TextBoxHint Hint="Filter" AcceptsReturn="True"/>
+            <local:TextBoxHintWithClear Hint="Filter with clear button" HasClearButton="True"/>
         </StackPanel>
     </Grid>
 </Window>

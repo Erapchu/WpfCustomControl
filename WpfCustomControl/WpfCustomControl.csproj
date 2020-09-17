@@ -71,12 +71,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\NotConverter.cs" />
+    <Compile Include="Converters\EmptyTextConverter.cs" />
+    <Compile Include="Converters\TextFieldClearButtonVisibilityConverter.cs" />
     <Compile Include="Spinner.xaml.cs">
       <DependentUpon>Spinner.xaml</DependentUpon>
     </Compile>
     <Compile Include="SpinnerImage.cs" />
     <Compile Include="TextBoxHint.xaml.cs">
       <DependentUpon>TextBoxHint.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TextBoxHintWithClear.xaml.cs">
+      <DependentUpon>TextBoxHintWithClear.xaml</DependentUpon>
     </Compile>
     <Page Include="ComboBoxWithButton.xaml">
       <SubType>Designer</SubType>
@@ -111,6 +117,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TextBoxHint.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TextBoxHintWithClear.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
