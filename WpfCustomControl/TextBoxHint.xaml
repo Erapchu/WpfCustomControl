@@ -15,6 +15,7 @@
                                Opacity="0.5" 
                                FontSize="12"
                                Visibility="Collapsed"
+                               TextTrimming="CharacterEllipsis"
                                x:Name="HintTextBlock"
                                Margin="3 0 0 0"
                                Text="{Binding Hint, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
