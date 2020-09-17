@@ -28,7 +28,8 @@
             <TextBox/>
             <local:TextBoxHint/>
             <local:TextBoxHint Hint="Filter" AcceptsReturn="True"/>
-            <local:TextBoxHintWithClear Hint="Filter with clear button" HasClearButton="True"/>
+            <local:TextBoxHintWithClear Hint="Filter with enabled clear button" HasClearButton="True"/>
+            <local:TextBoxHintWithClear Hint="Filter with disabled clear button" HasClearButton="False"/>
         </StackPanel>
     </Grid>
 </Window>

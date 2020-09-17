@@ -35,6 +35,7 @@
                     <Button 
                         x:Name="PART_ClearButton"
                         Grid.Column="1"
+                        Focusable="False"
                         HorizontalAlignment="Right"
                         Width="20">
                         <Button.Visibility>
