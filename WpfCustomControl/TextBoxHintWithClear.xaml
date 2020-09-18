@@ -38,7 +38,7 @@
                         Grid.Column="1"
                         Focusable="False"
                         HorizontalAlignment="Right"
-                        Cursor="Hand"
+                        ToolTip="Clear"
                         Margin="0 0 3 0"
                         Background="Transparent">
                         <Button.Visibility>
