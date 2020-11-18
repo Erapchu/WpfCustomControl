@@ -24,5 +24,14 @@ namespace WpfCustomControl
         {
             InitializeComponent();
         }
+
+        public BitmapSource BitmapSource
+        {
+            get { return (BitmapSource)GetValue(BitmapSourceProperty); }
+            set { SetValue(BitmapSourceProperty, value); }
+        }
+
+        public static readonly DependencyProperty BitmapSourceProperty =
+            DependencyProperty.Register("Image", typeof(BitmapSource), typeof(Spinner), new UIPropertyMetadata());
     }
 }

@@ -8,6 +8,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <BitmapImage x:Key="ResetImage" UriSource="reset.png"/>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <StackPanel>
             <local:ComboBoxWithButton ItemsSource="{Binding Collection}">
@@ -23,7 +28,7 @@
                     <Button Content="Check" Command="{Binding SomeCommand}"/>
                 </local:ComboBoxWithButton.AdditionalControl>
             </local:ComboBoxWithButton>
-            <local:Spinner/>
+            <local:Spinner BitmapSource="{StaticResource ResetImage}" Width="64" Height="64"/>
             <!--<local:ExpanderWithImage/>-->
             <TextBox/>
             <local:TextBoxHint/>
