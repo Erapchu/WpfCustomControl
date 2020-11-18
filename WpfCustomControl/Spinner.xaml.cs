@@ -25,13 +25,13 @@ namespace WpfCustomControl
             InitializeComponent();
         }
 
-        public BitmapSource BitmapSource
+        public BitmapSource Source
         {
-            get { return (BitmapSource)GetValue(BitmapSourceProperty); }
-            set { SetValue(BitmapSourceProperty, value); }
+            get { return (BitmapSource)GetValue(SourceProperty); }
+            set { SetValue(SourceProperty, value); }
         }
 
-        public static readonly DependencyProperty BitmapSourceProperty =
-            DependencyProperty.Register("Image", typeof(BitmapSource), typeof(Spinner), new UIPropertyMetadata());
+        public static readonly DependencyProperty SourceProperty =
+            DependencyProperty.Register("Source", typeof(BitmapSource), typeof(Spinner), new UIPropertyMetadata());
     }
 }

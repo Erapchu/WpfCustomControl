@@ -28,7 +28,7 @@
                     <Button Content="Check" Command="{Binding SomeCommand}"/>
                 </local:ComboBoxWithButton.AdditionalControl>
             </local:ComboBoxWithButton>
-            <local:Spinner BitmapSource="{StaticResource ResetImage}" Width="64" Height="64"/>
+            <local:Spinner Source="{StaticResource ResetImage}" Width="64" Height="64"/>
             <!--<local:ExpanderWithImage/>-->
             <TextBox/>
             <local:TextBoxHint/>

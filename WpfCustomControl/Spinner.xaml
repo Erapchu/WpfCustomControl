@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:WpfCustomControl"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Image Source="{Binding BitmapSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Spinner}}}"
+    <Image Source="{Binding Source, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Spinner}}}"
            RenderTransformOrigin=".5,.5">
         <Image.RenderTransform>
             <RotateTransform x:Name="AnimatedRotateTransform" Angle="0" />
