@@ -78,6 +78,9 @@
       <DependentUpon>Spinner.xaml</DependentUpon>
     </Compile>
     <Compile Include="SpinnerImage.cs" />
+    <Compile Include="SpinnerWithoutImage.xaml.cs">
+      <DependentUpon>SpinnerWithoutImage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TextBoxHint.xaml.cs">
       <DependentUpon>TextBoxHint.xaml</DependentUpon>
     </Compile>
@@ -113,6 +116,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Spinner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SpinnerWithoutImage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

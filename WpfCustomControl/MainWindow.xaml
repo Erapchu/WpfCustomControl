@@ -29,6 +29,7 @@
                 </local:ComboBoxWithButton.AdditionalControl>
             </local:ComboBoxWithButton>
             <local:Spinner Source="{StaticResource ResetImage}" Width="64" Height="64"/>
+            <local:SpinnerWithoutImage/>
             <!--<local:ExpanderWithImage/>-->
             <TextBox/>
             <local:TextBoxHint/>
