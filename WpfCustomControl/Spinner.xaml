@@ -6,24 +6,34 @@
              xmlns:local="clr-namespace:WpfCustomControl"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Storyboard x:Key="ImageRotateAnimation">
+            <DoubleAnimation
+                Storyboard.TargetProperty="RenderTransform.Angle" 
+                By="10"        
+                To="360" 
+                Duration="0:0:1" 
+                RepeatBehavior="Forever"/>
+        </Storyboard>
+    </UserControl.Resources>
     <Image Source="{Binding Source, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Spinner}}}"
            RenderTransformOrigin=".5,.5">
         <Image.RenderTransform>
             <RotateTransform x:Name="AnimatedRotateTransform" Angle="0" />
         </Image.RenderTransform>
-        <Image.Triggers>
-            <EventTrigger RoutedEvent="UserControl.Loaded">
-                <BeginStoryboard>
-                    <Storyboard>
-                        <DoubleAnimation Storyboard.TargetName="AnimatedRotateTransform" 
-                        Storyboard.TargetProperty="Angle" 
-                        By="10"        
-                        To="360" 
-                        Duration="0:0:1" 
-                        RepeatBehavior="Forever"/>
-                    </Storyboard>
-                </BeginStoryboard>
-            </EventTrigger>
-        </Image.Triggers>
+        <Image.Style>
+            <Style TargetType="Image">
+                <Style.Triggers>
+                    <Trigger Property="IsVisible" Value="true">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard Storyboard="{StaticResource ImageRotateAnimation}" x:Name="ImageRotateStoryboard"/>
+                        </Trigger.EnterActions>
+                        <Trigger.ExitActions>
+                            <StopStoryboard BeginStoryboardName="ImageRotateStoryboard"/>
+                        </Trigger.ExitActions>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Image.Style>
     </Image>
 </UserControl>

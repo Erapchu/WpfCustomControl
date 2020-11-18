@@ -11,6 +11,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <BitmapImage x:Key="ResetImage" UriSource="reset.png"/>
+            <BooleanToVisibilityConverter x:Key="boolToVisibilityConverter"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
@@ -28,7 +29,8 @@
                     <Button Content="Check" Command="{Binding SomeCommand}"/>
                 </local:ComboBoxWithButton.AdditionalControl>
             </local:ComboBoxWithButton>
-            <local:Spinner Source="{StaticResource ResetImage}" Width="64" Height="64"/>
+            <local:Spinner Source="{StaticResource ResetImage}" Width="64" Height="64" Visibility="{Binding ElementName=toggle, Path=IsChecked, Converter={StaticResource boolToVisibilityConverter}}"/>
+            <ToggleButton IsChecked="true" Name="toggle" Height="20"/>
             <local:SpinnerWithoutImage/>
             <!--<local:ExpanderWithImage/>-->
             <TextBox/>
