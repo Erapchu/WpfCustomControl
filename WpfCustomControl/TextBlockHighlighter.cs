@@ -48,16 +48,20 @@ namespace WpfCustomControl
             int index = text.IndexOf(highlightText, StringComparison.CurrentCultureIgnoreCase);
             if (index < 0) return;
 
-            Brush selectionColor = (Brush)d.GetValue(HighlightColorProperty);
-            Brush forecolor = (Brush)d.GetValue(ForecolorProperty);
+            Brush selectionColor = GetHighlightColor(d);
+            Brush forecolor = GetForecolor(d);
 
             txtBlock.Inlines.Clear();
             while (true)
             {
-                txtBlock.Inlines.AddRange(new Inline[] {
+                txtBlock.Inlines.AddRange(new Inline[] 
+                {
                     new Run(text.Substring(0, index)),
-                    new Run(text.Substring(index, highlightText.Length)) {Background = selectionColor,
-                        Foreground = forecolor}
+                    new Run(text.Substring(index, highlightText.Length)) 
+                    {
+                        Background = selectionColor,
+                        Foreground = forecolor
+                    }
                 });
 
                 text = text.Substring(index + highlightText.Length);
