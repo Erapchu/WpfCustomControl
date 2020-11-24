@@ -12,6 +12,7 @@
         <ResourceDictionary>
             <BitmapImage x:Key="ResetImage" UriSource="reset.png"/>
             <BooleanToVisibilityConverter x:Key="boolToVisibilityConverter"/>
+            <local:BindingProxy x:Key="Proxy" Data="{Binding Path=.}"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
@@ -39,6 +40,17 @@
             <local:TextBoxHintWithClear Hint="Filter with enabled clear button" HasClearButton="True"/>
             <local:TextBoxHintWithClear Hint="Filter with disabled clear button" HasClearButton="False"/>
             <local:TextBoxHintWithClear Hint="Filter with enabled clear button and accepted return" HasClearButton="True" AcceptsReturn="True"/>
+            <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}"/>
+            <ListBox ItemsSource="{Binding HeroesCollection}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=.}"
+                               local:TextBlockHighlighter.Selection="{Binding Data.Filter, Mode=OneWay, Source={StaticResource Proxy}}"
+                               local:TextBlockHighlighter.HighlightColor="LightGreen"
+                               local:TextBlockHighlighter.Forecolor="Teal"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </StackPanel>
     </Grid>
 </Window>

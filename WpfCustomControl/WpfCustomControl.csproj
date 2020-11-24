@@ -71,6 +71,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BindingProxy.cs" />
     <Compile Include="Converters\NotConverter.cs" />
     <Compile Include="Converters\EmptyTextConverter.cs" />
     <Compile Include="Converters\TextFieldClearButtonVisibilityConverter.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="SpinnerWithoutImage.xaml.cs">
       <DependentUpon>SpinnerWithoutImage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TextBlockHighlighter.cs" />
     <Compile Include="TextBoxHint.xaml.cs">
       <DependentUpon>TextBoxHint.xaml</DependentUpon>
     </Compile>
