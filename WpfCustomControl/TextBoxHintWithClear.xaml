@@ -40,6 +40,7 @@
                         HorizontalAlignment="Right"
                         ToolTip="Clear"
                         Margin="0 0 3 0"
+                        Cursor="Hand"
                         Background="Transparent"
                         BorderBrush="Transparent">
                         <Button.Visibility>
