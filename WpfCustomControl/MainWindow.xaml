@@ -1,13 +1,16 @@
 ﻿<Window
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfCustomControl"
-        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Class="WpfCustomControl.MainWindow"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-        Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:WpfCustomControl"
+    xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" 
+    xmlns:ctrls="clr-namespace:WpfCustomControl.Controls"
+    xmlns:dialogs="clr-namespace:WpfCustomControl.Dialogs"
+    x:Class="WpfCustomControl.MainWindow"
+    mc:Ignorable="d"
+    Title="MainWindow" Height="450" Width="800"
+    Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
     <Window.Resources>
         <ResourceDictionary>
             <BitmapImage x:Key="ResetImage" UriSource="reset.png"/>
@@ -16,6 +19,11 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
+        <ctrls:Flyout
+            Panel.ZIndex="1"
+            IsOpen="{Binding IsChecked, ElementName=ToggleFlyoutButton}">
+            <dialogs:TextBoxes />
+        </ctrls:Flyout>
         <StackPanel>
             <local:ComboBoxWithButton ItemsSource="{Binding Collection}">
                 <!--AdditionalButtonContent="Teeeext"
@@ -40,6 +48,9 @@
             <local:TextBoxHintWithClear Hint="Filter with enabled clear button" HasClearButton="True"/>
             <local:TextBoxHintWithClear Hint="Filter with disabled clear button" HasClearButton="False"/>
             <local:TextBoxHintWithClear Hint="Filter with enabled clear button and accepted return" HasClearButton="True" AcceptsReturn="True"/>
+            <ToggleButton 
+                x:Name="ToggleFlyoutButton"
+                Content="Toggle flyout"/>
             <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}"/>
             <ListBox ItemsSource="{Binding HeroesCollection}">
                 <ListBox.ItemTemplate>
