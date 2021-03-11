@@ -187,6 +187,9 @@
             Property="KeyboardNavigation.TabNavigation"
             Value="Cycle" />
         <Setter
+            Property="Visibility"
+            Value="Hidden" />
+        <Setter
             Property="Template"
             Value="{StaticResource FlyoutTemplate}" />
     </Style>

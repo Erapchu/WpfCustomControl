@@ -33,6 +33,10 @@ namespace WpfCustomControl.Controls
             base.OnApplyTemplate();
 
             _flyoutRoot = GetTemplateChild("PART_Root") as FrameworkElement;
+
+            if (_flyoutRoot is null)
+                return;
+
             _flyoutContent = GetTemplateChild("PART_Content") as FrameworkElement;
             _showStoryboard = GetTemplateChild("ShowStoryboard") as Storyboard;
             _hideStoryboard = GetTemplateChild("HideStoryboard") as Storyboard;
@@ -40,6 +44,9 @@ namespace WpfCustomControl.Controls
             _hideFrameY = GetTemplateChild("hideFrameY") as SplineDoubleKeyFrame;
             _showFrame = GetTemplateChild("showFrame") as SplineDoubleKeyFrame;
             _showFrameY = GetTemplateChild("showFrameY") as SplineDoubleKeyFrame;
+
+            if (_hideFrame is null || _showFrame is null || _hideFrameY is null || _showFrameY is null)
+                return;
 
             ApplyAnimation();
         }
@@ -110,6 +117,9 @@ namespace WpfCustomControl.Controls
 
         private void ApplyAnimation(bool resetShowFrame = true)
         {
+            if (_flyoutRoot is null || _hideFrame is null || _showFrame is null || _hideFrameY is null || _showFrameY is null)
+                return;
+
             _showFrame.Value = 0;
 
             HorizontalAlignment = Margin.Right <= 0 ? HorizontalContentAlignment != HorizontalAlignment.Stretch ? HorizontalAlignment.Left : HorizontalContentAlignment : HorizontalAlignment.Stretch;

@@ -11,6 +11,8 @@
     d:DesignWidth="450">
     <Grid>
         <StackPanel>
+            <TextBlock 
+                Text="Textboxes test"/>
             <TextBox />
             <TextBox />
             <TextBox />
