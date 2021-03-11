@@ -161,7 +161,7 @@
             </VisualStateManager.VisualStateGroups>
         </Border>
     </ControlTemplate>
-    
+
     <Style
         x:Key="FlyoutStyle"
         TargetType="{x:Type ctrls:Flyout}">
@@ -189,6 +189,9 @@
         <Setter
             Property="Visibility"
             Value="Hidden" />
+        <Setter
+            Property="Background"
+            Value="#FFFFFFFF" />
         <Setter
             Property="Template"
             Value="{StaticResource FlyoutTemplate}" />
