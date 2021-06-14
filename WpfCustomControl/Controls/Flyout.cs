@@ -20,6 +20,7 @@ namespace WpfCustomControl.Controls
         private SplineDoubleKeyFrame _hideFrameY;
         private SplineDoubleKeyFrame _showFrame;
         private SplineDoubleKeyFrame _showFrameY;
+        private SplineDoubleKeyFrame _fadeOutFrame;
         private FrameworkElement _flyoutRoot;
         private FrameworkElement _flyoutContent;
 
@@ -44,11 +45,52 @@ namespace WpfCustomControl.Controls
             _hideFrameY = GetTemplateChild("hideFrameY") as SplineDoubleKeyFrame;
             _showFrame = GetTemplateChild("showFrame") as SplineDoubleKeyFrame;
             _showFrameY = GetTemplateChild("showFrameY") as SplineDoubleKeyFrame;
+            _fadeOutFrame = GetTemplateChild("fadeOutFrame") as SplineDoubleKeyFrame;
 
             if (_hideFrame is null || _showFrame is null || _hideFrameY is null || _showFrameY is null)
                 return;
 
-            ApplyAnimation();
+            ApplyAnimation(AnimateOpacity);
+        }
+
+        public static readonly DependencyProperty AnimateOpacityProperty = DependencyProperty.Register(
+            nameof(AnimateOpacity),
+            typeof(bool),
+            typeof(Flyout),
+            new FrameworkPropertyMetadata(false, UpdateOpacityChange));
+
+        private static void UpdateOpacityChange(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        {
+            if (!(dependencyObject is Flyout flyout))
+                return;
+
+            if (flyout._flyoutRoot is null
+                || flyout._fadeOutFrame is null
+                || System.ComponentModel.DesignerProperties.GetIsInDesignMode(flyout))
+                return;
+
+            if (!flyout.AnimateOpacity)
+            {
+                flyout._fadeOutFrame.Value = 1;
+                flyout._flyoutRoot.Opacity = 1;
+            }
+            else
+            {
+                flyout._fadeOutFrame.Value = 0;
+                if (!flyout.IsOpen)
+                {
+                    flyout._flyoutRoot.Opacity = 0;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets whether this <see cref="Flyout"/> animates the opacity when opening/closing the <see cref="Flyout"/>.
+        /// </summary>
+        public bool AnimateOpacity
+        {
+            get => (bool)GetValue(AnimateOpacityProperty);
+            set => SetValue(AnimateOpacityProperty, value);
         }
 
         /// <summary>
@@ -84,7 +126,7 @@ namespace WpfCustomControl.Controls
                         }
 
                         flyout.Visibility = Visibility.Visible;
-                        flyout.ApplyAnimation();
+                        flyout.ApplyAnimation(flyout.AnimateOpacity);
                         flyout.TryFocusElement();
                         if (flyout._showStoryboard != null)
                         {
@@ -115,12 +157,30 @@ namespace WpfCustomControl.Controls
             flyout.Dispatcher.BeginInvoke(DispatcherPriority.Background, openedChangedAction);
         }
 
-        private void ApplyAnimation(bool resetShowFrame = true)
+        private void ApplyAnimation(bool animateOpacity, bool resetShowFrame = true)
         {
-            if (_flyoutRoot is null || _hideFrame is null || _showFrame is null || _hideFrameY is null || _showFrameY is null)
+            if (_flyoutRoot is null
+                || _hideFrame is null
+                || _showFrame is null
+                || _hideFrameY is null
+                || _showFrameY is null)
                 return;
 
             _showFrame.Value = 0;
+
+            if (!animateOpacity)
+            {
+                _fadeOutFrame.Value = 1;
+                _flyoutRoot.Opacity = 1;
+            }
+            else
+            {
+                _fadeOutFrame.Value = 0;
+                if (!IsOpen)
+                {
+                    _flyoutRoot.Opacity = 0;
+                }
+            }
 
             HorizontalAlignment = Margin.Right <= 0 ? HorizontalContentAlignment != HorizontalAlignment.Stretch ? HorizontalAlignment.Left : HorizontalContentAlignment : HorizontalAlignment.Stretch;
             VerticalAlignment = VerticalAlignment.Stretch;
