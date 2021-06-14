@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfCustomControl.Controls;
 
 namespace WpfCustomControl
 {
@@ -24,6 +25,13 @@ namespace WpfCustomControl
         {
             InitializeComponent();
             DataContext = new MainViewModel();
+        }
+
+        private void Flyout_IsOpenChanged(object sender, RoutedEventArgs e)
+        {
+            if (!(sender is Flyout flyout))
+                return;
+
         }
     }
 }

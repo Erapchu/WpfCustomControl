@@ -53,6 +53,14 @@ namespace WpfCustomControl.Controls
             ApplyAnimation(AnimateOpacity);
         }
 
+        public static readonly RoutedEvent IsOpenChangedEvent = EventManager.RegisterRoutedEvent(nameof(IsOpenChanged), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Flyout));
+
+        public event RoutedEventHandler IsOpenChanged
+        {
+            add { AddHandler(IsOpenChangedEvent, value); }
+            remove { RemoveHandler(IsOpenChangedEvent, value); }
+        }
+
         public static readonly DependencyProperty AnimateOpacityProperty = DependencyProperty.Register(
             nameof(AnimateOpacity),
             typeof(bool),
@@ -155,6 +163,8 @@ namespace WpfCustomControl.Controls
             };
 
             flyout.Dispatcher.BeginInvoke(DispatcherPriority.Background, openedChangedAction);
+
+            flyout.RaiseEvent(new RoutedEventArgs(IsOpenChangedEvent, flyout));
         }
 
         private void ApplyAnimation(bool animateOpacity, bool resetShowFrame = true)

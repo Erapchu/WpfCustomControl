@@ -21,7 +21,8 @@
     <Grid>
         <ctrls:Flyout
             Panel.ZIndex="1"
-            IsOpen="{Binding IsChecked, ElementName=ToggleFlyoutButton}">
+            IsOpen="{Binding IsChecked, ElementName=ToggleFlyoutButton}"
+            IsOpenChanged="Flyout_IsOpenChanged">
             <dialogs:TextBoxes />
         </ctrls:Flyout>
         <StackPanel>
