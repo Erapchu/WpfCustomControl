@@ -21,6 +21,7 @@
     <Grid>
         <ctrls:Flyout
             Panel.ZIndex="1"
+            AnimateOpacity="True"
             IsOpen="{Binding IsChecked, ElementName=ToggleFlyoutButton}"
             IsOpenChanged="Flyout_IsOpenChanged">
             <dialogs:TextBoxes />
