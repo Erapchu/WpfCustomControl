@@ -72,6 +72,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BindingProxy.cs" />
+    <Compile Include="Controls\FastShadow.cs" />
     <Compile Include="Controls\Flyout.cs" />
     <Compile Include="Converters\NotConverter.cs" />
     <Compile Include="Converters\EmptyTextConverter.cs" />

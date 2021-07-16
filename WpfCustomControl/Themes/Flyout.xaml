@@ -19,21 +19,14 @@
             </Border.RenderTransform>
             <Grid>
                 <AdornerDecorator x:Name="PART_ShadowBorder">
-                    <AdornerDecorator.CacheMode>
-                        <BitmapCache/>
-                    </AdornerDecorator.CacheMode>
-                    <Border Background="{TemplateBinding Background}">
-                        <Border.Effect>
-                            <DropShadowEffect
-                                BlurRadius="35"
-                                ShadowDepth="13"
-                                Direction="270"
-                                Color="{StaticResource MaterialShadow}"
-                                Opacity=".42"
-                                RenderingBias="Performance"
-                                po:Freeze="True" />
-                        </Border.Effect>
-                    </Border>
+                    <ctrls:FastShadow
+                        Color="{StaticResource MaterialShadow}"
+                        ShadowDepth="0"
+                        BlurRadius="30"
+                        Direction="270"
+                        Opacity="0.42">
+                        <Border Background="{TemplateBinding Background}"/>
+                    </ctrls:FastShadow>
                 </AdornerDecorator>
                 <AdornerDecorator>
                     <DockPanel FocusVisualStyle="{x:Null}" Focusable="False">
