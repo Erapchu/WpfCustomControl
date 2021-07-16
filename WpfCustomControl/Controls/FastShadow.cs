@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -21,13 +17,13 @@ namespace WpfCustomControl.Controls
         #region Dynamic Properties
 
         public static readonly DependencyProperty ColorProperty =
-                DependencyProperty.Register(
-                        "Color",
-                        typeof(Color),
-                        typeof(FastShadow),
-                        new FrameworkPropertyMetadata(
-                                Color.FromArgb(0x71, 0x00, 0x00, 0x00),
-                                FrameworkPropertyMetadataOptions.AffectsRender));
+            DependencyProperty.Register(
+                "Color",
+                typeof(Color),
+                typeof(FastShadow),
+                new FrameworkPropertyMetadata(
+                    Color.FromArgb(0x71, 0x00, 0x00, 0x00),
+                    FrameworkPropertyMetadataOptions.AffectsRender));
 
         /// <summary>
         /// The Color property defines the Color used to fill the shadow region. 
@@ -35,8 +31,8 @@ namespace WpfCustomControl.Controls
         [Category("Common Properties")]
         public Color Color
         {
-            get { return (Color)GetValue(ColorProperty); }
-            set { SetValue(ColorProperty, value); }
+            get => (Color)GetValue(ColorProperty);
+            set => SetValue(ColorProperty, value);
         }
 
         /// <summary>
@@ -46,15 +42,19 @@ namespace WpfCustomControl.Controls
         [Category("Common Properties"), Description("Distance from centre")]
         public double ShadowDepth
         {
-            get { return (double)GetValue(ShadowDepthProperty); }
-            set { SetValue(ShadowDepthProperty, value); }
+            get => (double)GetValue(ShadowDepthProperty);
+            set => SetValue(ShadowDepthProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for ShadowDepth.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ShadowDepthProperty =
-            DependencyProperty.Register("ShadowDepth", typeof(double), typeof(FastShadow),
-            new FrameworkPropertyMetadata(
-                5.0, FrameworkPropertyMetadataOptions.AffectsRender,
+            DependencyProperty.Register(
+                "ShadowDepth",
+                typeof(double),
+                typeof(FastShadow),
+                new FrameworkPropertyMetadata(
+                    5.0,
+                    FrameworkPropertyMetadataOptions.AffectsRender,
                     new PropertyChangedCallback((o, e) =>
                     {
                         FastShadow f = o as FastShadow;
@@ -69,16 +69,21 @@ namespace WpfCustomControl.Controls
         [Category("Common Properties"), Description("Size of the drop shadow")]
         public double BlurRadius
         {
-            get { return (double)GetValue(BlurRadiusProperty); }
-            set { SetValue(BlurRadiusProperty, value); }
+            get => (double)GetValue(BlurRadiusProperty);
+            set => SetValue(BlurRadiusProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for BlurRadius.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BlurRadiusProperty =
-            DependencyProperty.Register("BlurRadius", typeof(double), typeof(FastShadow),
-            new FrameworkPropertyMetadata(10.0,
-                FrameworkPropertyMetadataOptions.AffectsRender,
-                    new PropertyChangedCallback((o, e) => {
+            DependencyProperty.Register(
+                "BlurRadius",
+                typeof(double),
+                typeof(FastShadow),
+                new FrameworkPropertyMetadata(
+                    10.0,
+                    FrameworkPropertyMetadataOptions.AffectsRender,
+                    new PropertyChangedCallback((o, e) =>
+                    {
                         FastShadow f = o as FastShadow;
                         if ((double)e.NewValue < 0)
                             f.BlurRadius = 0;
@@ -91,14 +96,19 @@ namespace WpfCustomControl.Controls
         [Category("Common Properties"), Description("Angle of the shadow")]
         public int Direction
         {
-            get { return (int)GetValue(DirectionProperty); }
-            set { SetValue(DirectionProperty, value); }
+            get => (int)GetValue(DirectionProperty);
+            set => SetValue(DirectionProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for Direction.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DirectionProperty =
-            DependencyProperty.Register("Direction", typeof(int), typeof(FastShadow),
-            new FrameworkPropertyMetadata(315, FrameworkPropertyMetadataOptions.AffectsRender));
+            DependencyProperty.Register(
+                "Direction",
+                typeof(int),
+                typeof(FastShadow),
+                new FrameworkPropertyMetadata(
+                    315,
+                    FrameworkPropertyMetadataOptions.AffectsRender));
 
 
         #endregion Dynamic Properties
@@ -107,7 +117,6 @@ namespace WpfCustomControl.Controls
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-
             double distance = Math.Max(0, ShadowDepth);
             double blurRadius = Math.Max(BlurRadius, 0);
             double angle = Direction + 45; // Make it behave the same as DropShadowEffect
