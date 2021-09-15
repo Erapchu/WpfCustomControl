@@ -21,6 +21,7 @@
                 <AdornerDecorator x:Name="PART_ShadowBorder">
                     <ctrls:FastShadow
                         Color="{StaticResource MaterialShadow}"
+                        IsHitTestVisible="False"
                         ShadowDepth="0"
                         BlurRadius="30"
                         Direction="270"
