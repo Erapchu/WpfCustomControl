@@ -6,9 +6,7 @@
     
     <Color x:Key="MaterialShadow">#AA000000</Color>
     
-    <ControlTemplate
-        x:Key="FlyoutTemplate"
-        TargetType="{x:Type ctrls:Flyout}">
+    <ControlTemplate x:Key="FlyoutTemplate" TargetType="{x:Type ctrls:Flyout}">
         <Border
             x:Name="PART_Root"
             Background="{TemplateBinding Background}"
