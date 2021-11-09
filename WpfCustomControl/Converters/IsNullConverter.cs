@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace WpfCustomControl
+namespace WpfCustomControl.Converters
 {
 	[ValueConversion(typeof(object), typeof(bool))]
 	public class IsNullConverter : IValueConverter

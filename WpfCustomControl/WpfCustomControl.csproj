@@ -120,7 +120,7 @@
     <Compile Include="ExpanderWithImage.xaml.cs">
       <DependentUpon>ExpanderWithImage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="IsNullConverter.cs" />
+    <Compile Include="Converters\IsNullConverter.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
