@@ -3,9 +3,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ctrls="clr-namespace:WpfCustomControl.Controls"
     xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
-    
+
     <Color x:Key="MaterialShadow">#AA000000</Color>
-    
+
     <ControlTemplate x:Key="FlyoutTemplate" TargetType="{x:Type ctrls:Flyout}">
         <Border
             x:Name="PART_Root"
@@ -18,13 +18,13 @@
             <Grid>
                 <AdornerDecorator x:Name="PART_ShadowBorder">
                     <ctrls:FastShadow
-                        Color="{StaticResource MaterialShadow}"
-                        IsHitTestVisible="False"
-                        ShadowDepth="0"
                         BlurRadius="30"
                         Direction="270"
-                        Opacity="0.42">
-                        <Border Background="{TemplateBinding Background}"/>
+                        IsHitTestVisible="False"
+                        Opacity="0.42"
+                        ShadowDepth="0"
+                        Color="{StaticResource MaterialShadow}">
+                        <Border Background="{TemplateBinding Background}" />
                     </ctrls:FastShadow>
                 </AdornerDecorator>
                 <AdornerDecorator>
@@ -35,7 +35,7 @@
                             DockPanel.Dock="Bottom" />
                     </DockPanel>
                 </AdornerDecorator>
-            </Grid>            
+            </Grid>
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroup>
                     <VisualState x:Name="Default" />
@@ -153,6 +153,14 @@
                 </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
         </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Position" Value="Top">
+                <Setter TargetName="PART_Content" Property="DockPanel.Dock" Value="Right" />
+            </Trigger>
+            <Trigger Property="Position" Value="Bottom">
+                <Setter TargetName="PART_Content" Property="DockPanel.Dock" Value="Right" />
+            </Trigger>
+        </ControlTemplate.Triggers>
     </ControlTemplate>
 
     <Style x:Key="FlyoutStyle" TargetType="{x:Type ctrls:Flyout}">

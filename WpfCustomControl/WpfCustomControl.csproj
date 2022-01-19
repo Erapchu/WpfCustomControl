@@ -74,6 +74,7 @@
     <Compile Include="BindingProxy.cs" />
     <Compile Include="Controls\FastShadow.cs" />
     <Compile Include="Controls\Flyout.cs" />
+    <Compile Include="Controls\Position.cs" />
     <Compile Include="Converters\NotConverter.cs" />
     <Compile Include="Converters\EmptyTextConverter.cs" />
     <Compile Include="Converters\TextFieldClearButtonVisibilityConverter.cs" />

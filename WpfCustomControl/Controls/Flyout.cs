@@ -50,7 +50,7 @@ namespace WpfCustomControl.Controls
             if (_hideFrame is null || _showFrame is null || _hideFrameY is null || _showFrameY is null)
                 return;
 
-            ApplyAnimation(AnimateOpacity);
+            ApplyAnimation(Position, AnimateOpacity);
         }
 
         public static readonly RoutedEvent IsOpenChangedEvent = EventManager.RegisterRoutedEvent(nameof(IsOpenChanged), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Flyout));
@@ -134,7 +134,7 @@ namespace WpfCustomControl.Controls
                         }
 
                         flyout.Visibility = Visibility.Visible;
-                        flyout.ApplyAnimation(flyout.AnimateOpacity);
+                        flyout.ApplyAnimation(flyout.Position, flyout.AnimateOpacity);
                         flyout.TryFocusElement();
                         if (flyout._showStoryboard != null)
                         {
@@ -167,7 +167,7 @@ namespace WpfCustomControl.Controls
             flyout.RaiseEvent(new RoutedEventArgs(IsOpenChangedEvent, flyout));
         }
 
-        private void ApplyAnimation(bool animateOpacity, bool resetShowFrame = true)
+        private void ApplyAnimation(Position position, bool animateOpacity, bool resetShowFrame = true)
         {
             if (_flyoutRoot is null
                 || _hideFrame is null
@@ -192,13 +192,100 @@ namespace WpfCustomControl.Controls
                 }
             }
 
-            HorizontalAlignment = Margin.Right <= 0 ? HorizontalContentAlignment != HorizontalAlignment.Stretch ? HorizontalAlignment.Left : HorizontalContentAlignment : HorizontalAlignment.Stretch;
-            VerticalAlignment = VerticalAlignment.Stretch;
-            _hideFrame.Value = -_flyoutRoot.ActualWidth - Margin.Left;
-            if (resetShowFrame)
+            switch (position)
             {
-                _flyoutRoot.RenderTransform = new TranslateTransform(-_flyoutRoot.ActualWidth, 0);
+                default:
+                    this.HorizontalAlignment = this.Margin.Right <= 0 ? this.HorizontalContentAlignment != HorizontalAlignment.Stretch ? HorizontalAlignment.Left : this.HorizontalContentAlignment : HorizontalAlignment.Stretch;
+                    this.VerticalAlignment = VerticalAlignment.Stretch;
+                    this._hideFrame.Value = -this._flyoutRoot.ActualWidth - this.Margin.Left;
+                    if (resetShowFrame)
+                    {
+                        this._flyoutRoot.RenderTransform = new TranslateTransform(-this._flyoutRoot.ActualWidth, 0);
+                    }
+
+                    break;
+                case Position.Right:
+                    this.HorizontalAlignment = this.Margin.Left <= 0 ? this.HorizontalContentAlignment != HorizontalAlignment.Stretch ? HorizontalAlignment.Right : this.HorizontalContentAlignment : HorizontalAlignment.Stretch;
+                    this.VerticalAlignment = VerticalAlignment.Stretch;
+                    this._hideFrame.Value = this._flyoutRoot.ActualWidth + this.Margin.Right;
+                    if (resetShowFrame)
+                    {
+                        this._flyoutRoot.RenderTransform = new TranslateTransform(this._flyoutRoot.ActualWidth, 0);
+                    }
+
+                    break;
+                case Position.Top:
+                    this.HorizontalAlignment = HorizontalAlignment.Stretch;
+                    this.VerticalAlignment = this.Margin.Bottom <= 0 ? this.VerticalContentAlignment != VerticalAlignment.Stretch ? VerticalAlignment.Top : this.VerticalContentAlignment : VerticalAlignment.Stretch;
+                    this._hideFrameY.Value = -this._flyoutRoot.ActualHeight - 1 - this.Margin.Top;
+                    if (resetShowFrame)
+                    {
+                        this._flyoutRoot.RenderTransform = new TranslateTransform(0, -this._flyoutRoot.ActualHeight - 1);
+                    }
+
+                    break;
+                case Position.Bottom:
+                    this.HorizontalAlignment = HorizontalAlignment.Stretch;
+                    this.VerticalAlignment = this.Margin.Top <= 0 ? this.VerticalContentAlignment != VerticalAlignment.Stretch ? VerticalAlignment.Bottom : this.VerticalContentAlignment : VerticalAlignment.Stretch;
+                    this._hideFrameY.Value = this._flyoutRoot.ActualHeight + this.Margin.Bottom;
+                    if (resetShowFrame)
+                    {
+                        this._flyoutRoot.RenderTransform = new TranslateTransform(0, this._flyoutRoot.ActualHeight);
+                    }
+
+                    break;
             }
+        }
+
+        public static readonly DependencyProperty AnimateOnPositionChangeProperty = DependencyProperty.Register(
+            nameof(AnimateOnPositionChange),
+            typeof(bool),
+            typeof(Flyout),
+            new PropertyMetadata(true));
+
+        /// <summary>
+        /// Gets or sets whether this <see cref="Flyout"/> uses the open/close animation when changing the <see cref="Position"/> property (default is true).
+        /// </summary>
+        public bool AnimateOnPositionChange
+        {
+            get => (bool)GetValue(AnimateOnPositionChangeProperty);
+            set => SetValue(AnimateOnPositionChangeProperty, value);
+        }
+
+        public static readonly DependencyProperty PositionProperty = DependencyProperty.Register(
+            nameof(Position),
+            typeof(Position),
+            typeof(Flyout),
+            new PropertyMetadata(Position.Left, OnPositionPropertyChanged));
+
+        private static void OnPositionPropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        {
+            var flyout = (Flyout)dependencyObject;
+            var wasOpen = flyout.IsOpen;
+            if (wasOpen && flyout.AnimateOnPositionChange)
+            {
+                flyout.ApplyAnimation((Position)e.NewValue, flyout.AnimateOpacity);
+                VisualStateManager.GoToState(flyout, "Hide", true);
+            }
+            else
+            {
+                flyout.ApplyAnimation((Position)e.NewValue, flyout.AnimateOpacity, false);
+            }
+
+            if (wasOpen && flyout.AnimateOnPositionChange)
+            {
+                flyout.ApplyAnimation((Position)e.NewValue, flyout.AnimateOpacity);
+                VisualStateManager.GoToState(flyout, "Show", true);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the position of this <see cref="Flyout"/> inside the <see cref="FlyoutsControl"/>.
+        /// </summary>
+        public Position Position
+        {
+            get => (Position)GetValue(PositionProperty);
+            set => SetValue(PositionProperty, value);
         }
 
         private void HideStoryboardCompleted(object sender, EventArgs e)
