@@ -24,6 +24,7 @@
             Position="Right"
             AnimateOpacity="True"
             IsOpen="{Binding IsChecked, ElementName=ToggleFlyoutButton}"
+            ShadowVisibility="Visible"
             IsOpenChanged="Flyout_IsOpenChanged">
             <dialogs:TextBoxes />
         </ctrls:Flyout>

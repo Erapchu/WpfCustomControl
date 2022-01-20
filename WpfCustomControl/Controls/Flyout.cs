@@ -40,6 +40,12 @@ namespace WpfCustomControl.Controls
             typeof(RoutedEventHandler),
             typeof(Flyout));
 
+        public static readonly DependencyProperty ShadowVisibilityProperty = DependencyProperty.Register(
+            nameof(ShadowVisibility),
+            typeof(Visibility),
+            typeof(Flyout),
+            new FrameworkPropertyMetadata(Visibility.Visible, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
         private Storyboard _showStoryboard;
         private Storyboard _hideStoryboard;
         private SplineDoubleKeyFrame _hideFrame;
@@ -84,6 +90,12 @@ namespace WpfCustomControl.Controls
         {
             get => (bool)GetValue(AnimateOnPositionChangeProperty);
             set => SetValue(AnimateOnPositionChangeProperty, value);
+        }
+
+        public Visibility ShadowVisibility
+        {
+            get => (Visibility)GetValue(ShadowVisibilityProperty);
+            set => SetValue(ShadowVisibilityProperty, value);
         }
 
         public event RoutedEventHandler IsOpenChanged
