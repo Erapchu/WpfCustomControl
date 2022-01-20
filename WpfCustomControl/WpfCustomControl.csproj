@@ -72,9 +72,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BindingProxy.cs" />
+    <Compile Include="Controls\FastShadow.cs" />
+    <Compile Include="Controls\Flyout.cs" />
+    <Compile Include="Controls\Position.cs" />
     <Compile Include="Converters\NotConverter.cs" />
     <Compile Include="Converters\EmptyTextConverter.cs" />
     <Compile Include="Converters\TextFieldClearButtonVisibilityConverter.cs" />
+    <Compile Include="Dialogs\TextBoxes.xaml.cs">
+      <DependentUpon>TextBoxes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Spinner.xaml.cs">
       <DependentUpon>Spinner.xaml</DependentUpon>
     </Compile>
@@ -90,6 +96,10 @@
       <DependentUpon>TextBoxHintWithClear.xaml</DependentUpon>
     </Compile>
     <Page Include="ComboBoxWithButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\TextBoxes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -111,7 +121,7 @@
     <Compile Include="ExpanderWithImage.xaml.cs">
       <DependentUpon>ExpanderWithImage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="IsNullConverter.cs" />
+    <Compile Include="Converters\IsNullConverter.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -130,6 +140,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TextBoxHintWithClear.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Flyout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

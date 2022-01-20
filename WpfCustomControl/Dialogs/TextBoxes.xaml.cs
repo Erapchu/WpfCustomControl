@@ -12,26 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfCustomControl.Controls;
 
-namespace WpfCustomControl
+namespace WpfCustomControl.Dialogs
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for TextBoxes.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TextBoxes : UserControl
     {
-        public MainWindow()
+        public TextBoxes()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
-        }
-
-        private void Flyout_IsOpenChanged(object sender, RoutedEventArgs e)
-        {
-            if (!(sender is Flyout flyout))
-                return;
-
         }
     }
 }
