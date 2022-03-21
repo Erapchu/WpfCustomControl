@@ -4,7 +4,7 @@
     xmlns:ctrls="clr-namespace:WpfCustomControl.Controls"
     xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
 
-    <Color x:Key="MaterialShadow">#AA000000</Color>
+    <Color x:Key="MaterialShadow">#55000000</Color>
 
     <ControlTemplate x:Key="FlyoutTemplate" TargetType="{x:Type ctrls:Flyout}">
         <Border
@@ -21,7 +21,6 @@
                         BlurRadius="30"
                         Direction="270"
                         IsHitTestVisible="False"
-                        Opacity="0.42"
                         ShadowDepth="0"
                         Color="{StaticResource MaterialShadow}">
                         <Border Background="{TemplateBinding Background}" />
