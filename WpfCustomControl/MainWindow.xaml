@@ -21,12 +21,21 @@
     <Grid>
         <ctrls:Flyout
             Panel.ZIndex="1"
-            Position="Right"
+            Position="Left"
             AnimateOpacity="True"
             IsOpen="{Binding IsChecked, ElementName=ToggleFlyoutButton}"
             ShadowVisibility="Visible"
+            AreAnimationsEnabled="True"
+            FocusedElement="{Binding ElementName=FocusTextbox}"
             IsOpenChanged="Flyout_IsOpenChanged">
-            <dialogs:TextBoxes />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <dialogs:TextBoxes />
+                <TextBox x:Name="FocusTextbox" Grid.Row="1" Text="FocusTest"/>
+            </Grid>
         </ctrls:Flyout>
         <StackPanel>
             <local:ComboBoxWithButton ItemsSource="{Binding Collection}">

@@ -40,11 +40,23 @@ namespace WpfCustomControl.Controls
             typeof(RoutedEventHandler),
             typeof(Flyout));
 
+        public static readonly DependencyProperty AreAnimationsEnabledProperty = DependencyProperty.Register(
+            nameof(AreAnimationsEnabled),
+            typeof(bool),
+            typeof(Flyout),
+            new PropertyMetadata(true));
+
         public static readonly DependencyProperty ShadowVisibilityProperty = DependencyProperty.Register(
             nameof(ShadowVisibility),
             typeof(Visibility),
             typeof(Flyout),
             new FrameworkPropertyMetadata(Visibility.Visible, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public static readonly DependencyProperty FocusedElementProperty = DependencyProperty.Register(
+            nameof(FocusedElement),
+            typeof(FrameworkElement),
+            typeof(Flyout),
+            new UIPropertyMetadata(null));
 
         private Storyboard _showStoryboard;
         private Storyboard _hideStoryboard;
@@ -98,10 +110,28 @@ namespace WpfCustomControl.Controls
             set => SetValue(ShadowVisibilityProperty, value);
         }
 
+        /// <summary>
+        /// Gets or sets a value that indicates whether the <see cref="Flyout"/> uses animations for open/close.
+        /// </summary>
+        public bool AreAnimationsEnabled
+        {
+            get => (bool)GetValue(AreAnimationsEnabledProperty);
+            set => SetValue(AreAnimationsEnabledProperty, value);
+        }
+
         public event RoutedEventHandler IsOpenChanged
         {
             add { AddHandler(IsOpenChangedEvent, value); }
             remove { RemoveHandler(IsOpenChangedEvent, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets the focused element.
+        /// </summary>
+        public FrameworkElement FocusedElement
+        {
+            get => (FrameworkElement)GetValue(FocusedElementProperty);
+            set => SetValue(FocusedElementProperty, value);
         }
 
         static Flyout()
@@ -142,47 +172,64 @@ namespace WpfCustomControl.Controls
             {
                 if (e.NewValue != e.OldValue)
                 {
-                    if ((bool)e.NewValue)
+                    if (flyout.AreAnimationsEnabled)
                     {
-                        if (flyout._hideStoryboard != null)
+                        if ((bool)e.NewValue)
                         {
-                            // don't let the storyboard end it's completed event
-                            // otherwise it could be hidden on start
-                            flyout._hideStoryboard.Completed -= flyout.HideStoryboardCompleted;
+                            if (flyout._hideStoryboard != null)
+                            {
+                                // don't let the storyboard end it's completed event
+                                // otherwise it could be hidden on start
+                                flyout._hideStoryboard.Completed -= flyout.HideStoryboardCompleted;
+                            }
+
+                            flyout.Visibility = Visibility.Visible;
+                            flyout.ApplyAnimation(flyout.Position, flyout.AnimateOpacity);
+                            flyout.TryFocusElement();
+                            if (flyout._showStoryboard != null)
+                            {
+                                flyout._showStoryboard.Completed += flyout.ShowStoryboardCompleted;
+                            }
+                        }
+                        else
+                        {
+                            if (flyout._showStoryboard != null)
+                            {
+                                flyout._showStoryboard.Completed -= flyout.ShowStoryboardCompleted;
+                            }
+
+                            if (flyout._hideStoryboard != null)
+                            {
+                                flyout._hideStoryboard.Completed += flyout.HideStoryboardCompleted;
+                            }
+                            else
+                            {
+                                flyout.Hide();
+                            }
                         }
 
-                        flyout.Visibility = Visibility.Visible;
-                        flyout.ApplyAnimation(flyout.Position, flyout.AnimateOpacity);
-                        flyout.TryFocusElement();
-                        if (flyout._showStoryboard != null)
-                        {
-                            flyout._showStoryboard.Completed += flyout.ShowStoryboardCompleted;
-                        }
+                        VisualStateManager.GoToState(flyout, (bool)e.NewValue == false ? "Hide" : "Show", true);
                     }
                     else
                     {
-                        if (flyout._showStoryboard != null)
+                        if ((bool)e.NewValue)
                         {
-                            flyout._showStoryboard.Completed -= flyout.ShowStoryboardCompleted;
-                        }
-
-                        if (flyout._hideStoryboard != null)
-                        {
-                            flyout._hideStoryboard.Completed += flyout.HideStoryboardCompleted;
+                            flyout.Visibility = Visibility.Visible;
+                            flyout.TryFocusElement();
                         }
                         else
                         {
                             flyout.Hide();
                         }
-                    }
 
-                    VisualStateManager.GoToState(flyout, (bool)e.NewValue == false ? "Hide" : "Show", true);
+                        VisualStateManager.GoToState(flyout, (bool)e.NewValue == false ? "HideDirect" : "ShowDirect", true);
+                    }
                 }
+
+                flyout.RaiseEvent(new RoutedEventArgs(IsOpenChangedEvent));
             };
 
             flyout.Dispatcher.BeginInvoke(DispatcherPriority.Background, openedChangedAction);
-
-            flyout.RaiseEvent(new RoutedEventArgs(IsOpenChangedEvent, flyout));
         }
 
         private static void OnPositionPropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
@@ -322,8 +369,14 @@ namespace WpfCustomControl.Controls
             // first focus itself
             Focus();
 
-            if (_flyoutContent != null)
+            if (FocusedElement != null)
+            {
+                FocusedElement.Focus();
+            }
+            else if (_flyoutContent != null)
+            {
                 _flyoutContent.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
+            }
         }
     }
 }
