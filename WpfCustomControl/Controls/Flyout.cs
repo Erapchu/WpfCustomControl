@@ -52,6 +52,12 @@ namespace WpfCustomControl.Controls
             typeof(Flyout),
             new FrameworkPropertyMetadata(Visibility.Visible, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
+        public static readonly DependencyProperty FocusedElementProperty = DependencyProperty.Register(
+            nameof(FocusedElement),
+            typeof(FrameworkElement),
+            typeof(Flyout),
+            new UIPropertyMetadata(null));
+
         private Storyboard _showStoryboard;
         private Storyboard _hideStoryboard;
         private SplineDoubleKeyFrame _hideFrame;
@@ -117,6 +123,15 @@ namespace WpfCustomControl.Controls
         {
             add { AddHandler(IsOpenChangedEvent, value); }
             remove { RemoveHandler(IsOpenChangedEvent, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets the focused element.
+        /// </summary>
+        public FrameworkElement FocusedElement
+        {
+            get => (FrameworkElement)GetValue(FocusedElementProperty);
+            set => SetValue(FocusedElementProperty, value);
         }
 
         static Flyout()
@@ -354,8 +369,14 @@ namespace WpfCustomControl.Controls
             // first focus itself
             Focus();
 
-            if (_flyoutContent != null)
+            if (FocusedElement != null)
+            {
+                FocusedElement.Focus();
+            }
+            else if (_flyoutContent != null)
+            {
                 _flyoutContent.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
+            }
         }
     }
 }
