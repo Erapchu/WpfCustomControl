@@ -80,6 +80,212 @@
                 Hint="Filter with enabled clear button and accepted return" />
             <ToggleButton x:Name="ToggleFlyoutButton" Content="Toggle flyout" />
             <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" />
+            <!--  https://stackoverflow.com/questions/62711321/wpf-how-to-virtualize-itemscontrol  -->
+            <ItemsControl MaxHeight="60">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Standard" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.Template>
+                    <ControlTemplate TargetType="ItemsControl">
+                        <Border
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <ScrollViewer
+                                Padding="{TemplateBinding Padding}"
+                                CanContentScroll="True"
+                                Focusable="False">
+                                <ItemsPresenter />
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </ItemsControl.Template>
+                <ListBoxItem>
+                    <Button Content="1" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Height="30" Content="2" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Height="40" Content="3" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="4" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Height="40" Content="5" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="6" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Height="50" Content="7" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="8" />
+                </ListBoxItem>
+            </ItemsControl>
             <ListBox ItemsSource="{Binding HeroesCollection}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
