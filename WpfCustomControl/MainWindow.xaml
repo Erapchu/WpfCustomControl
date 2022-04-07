@@ -1,77 +1,93 @@
 ﻿<Window
+    x:Class="WpfCustomControl.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="clr-namespace:WpfCustomControl"
-    xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" 
+    xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
     xmlns:ctrls="clr-namespace:WpfCustomControl.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dialogs="clr-namespace:WpfCustomControl.Dialogs"
-    x:Class="WpfCustomControl.MainWindow"
-    mc:Ignorable="d"
-    Title="MainWindow" Height="450" Width="800"
-    Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+    xmlns:local="clr-namespace:WpfCustomControl"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+    mc:Ignorable="d">
     <Window.Resources>
         <ResourceDictionary>
-            <BitmapImage x:Key="ResetImage" UriSource="reset.png"/>
-            <BooleanToVisibilityConverter x:Key="boolToVisibilityConverter"/>
-            <local:BindingProxy x:Key="Proxy" Data="{Binding Path=.}"/>
+            <BitmapImage x:Key="ResetImage" UriSource="reset.png" />
+            <BooleanToVisibilityConverter x:Key="boolToVisibilityConverter" />
+            <local:BindingProxy x:Key="Proxy" Data="{Binding Path=.}" />
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
         <ctrls:Flyout
             Panel.ZIndex="1"
-            Position="Left"
             AnimateOpacity="True"
-            IsOpen="{Binding IsChecked, ElementName=ToggleFlyoutButton}"
-            ShadowVisibility="Visible"
             AreAnimationsEnabled="True"
             FocusedElement="{Binding ElementName=FocusTextbox}"
-            IsOpenChanged="Flyout_IsOpenChanged">
+            IsOpen="{Binding IsChecked, ElementName=ToggleFlyoutButton}"
+            IsOpenChanged="Flyout_IsOpenChanged"
+            Position="Left"
+            ShadowVisibility="Visible">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <dialogs:TextBoxes />
-                <TextBox x:Name="FocusTextbox" Grid.Row="1" Text="FocusTest"/>
+                <TextBox
+                    x:Name="FocusTextbox"
+                    Grid.Row="1"
+                    Text="FocusTest" />
             </Grid>
         </ctrls:Flyout>
         <StackPanel>
             <local:ComboBoxWithButton ItemsSource="{Binding Collection}">
-                <!--AdditionalButtonContent="Teeeext"
-                AdditionalButtonCommand="{Binding SomeCommand}"
-                ItemsSource="{Binding Collection}">-->
+                <!--
+                    AdditionalButtonContent="Teeeext"
+                    AdditionalButtonCommand="{Binding SomeCommand}"
+                    ItemsSource="{Binding Collection}">
+                -->
                 <local:ComboBoxWithButton.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding .}"/>
+                        <TextBlock Text="{Binding .}" />
                     </DataTemplate>
                 </local:ComboBoxWithButton.ItemTemplate>
                 <local:ComboBoxWithButton.AdditionalControl>
-                    <Button Content="Check" Command="{Binding SomeCommand}"/>
+                    <Button Command="{Binding SomeCommand}" Content="Check" />
                 </local:ComboBoxWithButton.AdditionalControl>
             </local:ComboBoxWithButton>
-            <local:Spinner Source="{StaticResource ResetImage}" Width="64" Height="64" Visibility="{Binding ElementName=toggle, Path=IsChecked, Converter={StaticResource boolToVisibilityConverter}}"/>
-            <ToggleButton IsChecked="true" Name="toggle" Height="20"/>
-            <local:SpinnerWithoutImage/>
+            <local:Spinner
+                Width="64"
+                Height="64"
+                Source="{StaticResource ResetImage}"
+                Visibility="{Binding ElementName=toggle, Path=IsChecked, Converter={StaticResource boolToVisibilityConverter}}" />
+            <ToggleButton
+                Name="toggle"
+                Height="20"
+                IsChecked="true" />
+            <local:SpinnerWithoutImage />
             <!--<local:ExpanderWithImage/>-->
-            <TextBox/>
-            <local:TextBoxHint/>
-            <local:TextBoxHint Hint="Filter" AcceptsReturn="True"/>
-            <local:TextBoxHintWithClear Hint="Filter with enabled clear button" HasClearButton="True"/>
-            <local:TextBoxHintWithClear Hint="Filter with disabled clear button" HasClearButton="False"/>
-            <local:TextBoxHintWithClear Hint="Filter with enabled clear button and accepted return" HasClearButton="True" AcceptsReturn="True"/>
-            <ToggleButton 
-                x:Name="ToggleFlyoutButton"
-                Content="Toggle flyout"/>
-            <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox />
+            <local:TextBoxHint />
+            <local:TextBoxHint AcceptsReturn="True" Hint="Filter" />
+            <local:TextBoxHintWithClear HasClearButton="True" Hint="Filter with enabled clear button" />
+            <local:TextBoxHintWithClear HasClearButton="False" Hint="Filter with disabled clear button" />
+            <local:TextBoxHintWithClear
+                AcceptsReturn="True"
+                HasClearButton="True"
+                Hint="Filter with enabled clear button and accepted return" />
+            <ToggleButton x:Name="ToggleFlyoutButton" Content="Toggle flyout" />
+            <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" />
             <ListBox ItemsSource="{Binding HeroesCollection}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Path=.}"
-                               local:TextBlockHighlighter.Selection="{Binding Data.Filter, Mode=OneWay, Source={StaticResource Proxy}}"
-                               local:TextBlockHighlighter.HighlightColor="LightGreen"
-                               local:TextBlockHighlighter.Forecolor="Teal"/>
+                        <TextBlock
+                            local:TextBlockHighlighter.Forecolor="Teal"
+                            local:TextBlockHighlighter.HighlightColor="LightGreen"
+                            local:TextBlockHighlighter.Selection="{Binding Data.Filter, Mode=OneWay, Source={StaticResource Proxy}}"
+                            Text="{Binding Path=.}" />
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
