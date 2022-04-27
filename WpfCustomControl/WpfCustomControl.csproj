@@ -81,6 +81,7 @@
     <Compile Include="Dialogs\TextBoxes.xaml.cs">
       <DependentUpon>TextBoxes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LowLevelKeyboardListener.cs" />
     <Compile Include="Spinner.xaml.cs">
       <DependentUpon>Spinner.xaml</DependentUpon>
     </Compile>
