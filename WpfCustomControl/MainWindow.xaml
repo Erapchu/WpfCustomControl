@@ -10,7 +10,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="MainWindow"
     Width="800"
-    Height="450"
+    Height="550"
     Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
     mc:Ignorable="d">
     <Window.Resources>
@@ -79,7 +79,6 @@
                 HasClearButton="True"
                 Hint="Filter with enabled clear button and accepted return" />
             <ToggleButton x:Name="ToggleFlyoutButton" Content="Toggle flyout" />
-            <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" />
             <!--  https://stackoverflow.com/questions/62711321/wpf-how-to-virtualize-itemscontrol  -->
             <ItemsControl MaxHeight="60">
                 <ItemsControl.ItemsPanel>
@@ -286,6 +285,7 @@
                     <Button Content="8" />
                 </ListBoxItem>
             </ItemsControl>
+            <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" />
             <ListBox ItemsSource="{Binding HeroesCollection}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>

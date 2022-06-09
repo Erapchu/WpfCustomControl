@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -19,6 +15,12 @@ namespace WpfCustomControl
     /// </summary>
     public static class TextBlockHighlighter
     {
+        public static readonly DependencyProperty SelectionProperty = DependencyProperty.RegisterAttached(
+            "Selection",
+            typeof(string),
+            typeof(TextBlockHighlighter),
+            new PropertyMetadata(new PropertyChangedCallback(SelectText)));
+
         public static string GetSelection(DependencyObject obj)
         {
             return (string)obj.GetValue(SelectionProperty);
@@ -29,35 +31,36 @@ namespace WpfCustomControl
             obj.SetValue(SelectionProperty, value);
         }
 
-        public static readonly DependencyProperty SelectionProperty =
-            DependencyProperty.RegisterAttached("Selection", typeof(string), typeof(TextBlockHighlighter),
-                new PropertyMetadata(new PropertyChangedCallback(SelectText)));
-
         private static void SelectText(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d == null) return;
-            if (!(d is TextBlock)) throw new InvalidOperationException("Only valid for TextBlock");
+            if (d is null)
+                return;
 
-            TextBlock txtBlock = d as TextBlock;
-            string text = txtBlock.Text;
-            if (string.IsNullOrEmpty(text)) return;
+            if (!(d is TextBlock textBlock))
+                throw new InvalidOperationException("Only valid for TextBlock");
 
-            string highlightText = (string)d.GetValue(SelectionProperty);
-            if (string.IsNullOrEmpty(highlightText)) return;
+            string text = textBlock.Text;
+            if (string.IsNullOrEmpty(text))
+                return;
+
+            string highlightText = GetSelection(textBlock);
+            if (string.IsNullOrEmpty(highlightText))
+                return;
 
             int index = text.IndexOf(highlightText, StringComparison.CurrentCultureIgnoreCase);
-            if (index < 0) return;
+            if (index < 0)
+                return;
 
             Brush selectionColor = GetHighlightColor(d);
             Brush forecolor = GetForecolor(d);
 
-            txtBlock.Inlines.Clear();
+            textBlock.Inlines.Clear();
             while (true)
             {
-                txtBlock.Inlines.AddRange(new Inline[] 
+                textBlock.Inlines.AddRange(new Inline[]
                 {
                     new Run(text.Substring(0, index)),
-                    new Run(text.Substring(index, highlightText.Length)) 
+                    new Run(text.Substring(index, highlightText.Length))
                     {
                         Background = selectionColor,
                         Foreground = forecolor
@@ -69,11 +72,17 @@ namespace WpfCustomControl
 
                 if (index < 0)
                 {
-                    txtBlock.Inlines.Add(new Run(text));
+                    textBlock.Inlines.Add(new Run(text));
                     break;
                 }
             }
         }
+
+        public static readonly DependencyProperty HighlightColorProperty = DependencyProperty.RegisterAttached(
+            "HighlightColor",
+            typeof(Brush),
+            typeof(TextBlockHighlighter),
+            new PropertyMetadata(Brushes.Yellow, new PropertyChangedCallback(SelectText)));
 
         public static Brush GetHighlightColor(DependencyObject obj)
         {
@@ -85,10 +94,11 @@ namespace WpfCustomControl
             obj.SetValue(HighlightColorProperty, value);
         }
 
-        public static readonly DependencyProperty HighlightColorProperty =
-            DependencyProperty.RegisterAttached("HighlightColor", typeof(Brush), typeof(TextBlockHighlighter),
-                new PropertyMetadata(Brushes.Yellow, new PropertyChangedCallback(SelectText)));
-
+        public static readonly DependencyProperty ForecolorProperty = DependencyProperty.RegisterAttached(
+            "Forecolor",
+            typeof(Brush),
+            typeof(TextBlockHighlighter),
+            new PropertyMetadata(Brushes.Black, new PropertyChangedCallback(SelectText)));
 
         public static Brush GetForecolor(DependencyObject obj)
         {
@@ -99,10 +109,5 @@ namespace WpfCustomControl
         {
             obj.SetValue(ForecolorProperty, value);
         }
-
-        public static readonly DependencyProperty ForecolorProperty =
-            DependencyProperty.RegisterAttached("Forecolor", typeof(Brush), typeof(TextBlockHighlighter),
-                new PropertyMetadata(Brushes.Black, new PropertyChangedCallback(SelectText)));
-
     }
 }
