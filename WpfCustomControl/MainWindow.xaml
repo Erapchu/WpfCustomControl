@@ -11,6 +11,7 @@
     Title="MainWindow"
     Width="800"
     Height="550"
+    d:DataContext="{d:DesignInstance Type=local:MainViewModel, IsDesignTimeCreatable=False}"
     Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
     mc:Ignorable="d">
     <Window.Resources>
@@ -297,6 +298,46 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            <Slider
+                Maximum="500"
+                Minimum="0"
+                TickFrequency="1"
+                Value="{Binding PositionX}" />
+            <Slider
+                Maximum="500"
+                Minimum="0"
+                TickFrequency="1"
+                Value="{Binding PositionY}" />
+            <TextBox Text="{Binding PositionX, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Text="{Binding PositionY, UpdateSourceTrigger=PropertyChanged}" />
+            <Canvas>
+                <Rectangle
+                    Name="MyRectangle"
+                    Canvas.Left="0"
+                    Canvas.Top="0"
+                    Width="50"
+                    Height="50"
+                    Fill="Blue">
+                    <Rectangle.Triggers>
+                        <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                            <BeginStoryboard>
+                                <Storyboard Name="MyStoryboard">
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="MyRectangle"
+                                        Storyboard.TargetProperty="(Canvas.Left)"
+                                        To="{Binding PositionX, NotifyOnTargetUpdated=True}"
+                                        Duration="0:0:1" />
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="MyRectangle"
+                                        Storyboard.TargetProperty="(Canvas.Top)"
+                                        To="{Binding PositionY, NotifyOnTargetUpdated=True}"
+                                        Duration="0:0:1" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Rectangle.Triggers>
+                </Rectangle>
+            </Canvas>
         </StackPanel>
     </Grid>
 </Window>

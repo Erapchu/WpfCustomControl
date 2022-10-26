@@ -44,6 +44,20 @@ namespace WpfCustomControl
 
         public ICollectionView HeroesCollection { get; }
 
+        private int _positionX;
+        public int PositionX
+        {
+            get => _positionX;
+            set => Set(ref _positionX, value);
+        }
+
+        private int _positionY;
+        public int PositionY
+        {
+            get => _positionY;
+            set => Set(ref _positionY, value);
+        }
+
         public MainViewModel()
         {
             for (int i = 0; i < 100; i++)

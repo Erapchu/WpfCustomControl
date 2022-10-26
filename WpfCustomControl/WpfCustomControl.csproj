@@ -183,5 +183,6 @@
   <ItemGroup>
     <Resource Include="reset.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
