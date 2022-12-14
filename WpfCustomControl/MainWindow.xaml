@@ -43,301 +43,308 @@
                     Text="FocusTest" />
             </Grid>
         </ctrls:Flyout>
-        <StackPanel>
-            <local:ComboBoxWithButton ItemsSource="{Binding Collection}">
-                <!--
-                    AdditionalButtonContent="Teeeext"
-                    AdditionalButtonCommand="{Binding SomeCommand}"
-                    ItemsSource="{Binding Collection}">
-                -->
-                <local:ComboBoxWithButton.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding .}" />
-                    </DataTemplate>
-                </local:ComboBoxWithButton.ItemTemplate>
-                <local:ComboBoxWithButton.AdditionalControl>
-                    <Button Command="{Binding SomeCommand}" Content="Check" />
-                </local:ComboBoxWithButton.AdditionalControl>
-            </local:ComboBoxWithButton>
-            <local:Spinner
-                Width="64"
-                Height="64"
-                Source="{StaticResource ResetImage}"
-                Visibility="{Binding ElementName=toggle, Path=IsChecked, Converter={StaticResource boolToVisibilityConverter}}" />
-            <ToggleButton
-                Name="toggle"
-                Height="20"
-                IsChecked="true" />
-            <local:SpinnerWithoutImage />
-            <!--<local:ExpanderWithImage/>-->
-            <TextBox />
-            <local:TextBoxHint />
-            <local:TextBoxHint AcceptsReturn="True" Hint="Filter" />
-            <local:TextBoxHintWithClear HasClearButton="True" Hint="Filter with enabled clear button" />
-            <local:TextBoxHintWithClear HasClearButton="False" Hint="Filter with disabled clear button" />
-            <local:TextBoxHintWithClear
-                AcceptsReturn="True"
-                HasClearButton="True"
-                Hint="Filter with enabled clear button and accepted return" />
-            <ToggleButton x:Name="ToggleFlyoutButton" Content="Toggle flyout" />
-            <!--  https://stackoverflow.com/questions/62711321/wpf-how-to-virtualize-itemscontrol  -->
-            <ItemsControl MaxHeight="60">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Standard" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.Template>
-                    <ControlTemplate TargetType="ItemsControl">
-                        <Border
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                            <ScrollViewer
-                                Padding="{TemplateBinding Padding}"
-                                CanContentScroll="True"
-                                Focusable="False">
-                                <ItemsPresenter />
-                            </ScrollViewer>
-                        </Border>
-                    </ControlTemplate>
-                </ItemsControl.Template>
-                <ListBoxItem>
-                    <Button Content="1" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Height="30" Content="2" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Height="40" Content="3" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="4" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Height="40" Content="5" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="6" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Height="50" Content="7" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="8" />
-                </ListBoxItem>
-            </ItemsControl>
-            <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" />
-            <ListBox ItemsSource="{Binding HeroesCollection}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock
-                            local:TextBlockHighlighter.Forecolor="Teal"
-                            local:TextBlockHighlighter.HighlightColor="LightGreen"
-                            local:TextBlockHighlighter.Selection="{Binding Data.Filter, Mode=OneWay, Source={StaticResource Proxy}}"
-                            Text="{Binding Path=.}" />
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            <Slider
-                Maximum="500"
-                Minimum="0"
-                TickFrequency="1"
-                Value="{Binding PositionX}" />
-            <Slider
-                Maximum="500"
-                Minimum="0"
-                TickFrequency="1"
-                Value="{Binding PositionY}" />
-            <TextBox Text="{Binding PositionX, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox Text="{Binding PositionY, UpdateSourceTrigger=PropertyChanged}" />
-            <Canvas>
-                <Rectangle
-                    Name="MyRectangle"
-                    Canvas.Left="0"
-                    Canvas.Top="0"
-                    Width="50"
-                    Height="50"
-                    Fill="Blue">
-                    <Rectangle.Triggers>
-                        <EventTrigger RoutedEvent="Binding.TargetUpdated">
-                            <BeginStoryboard>
-                                <Storyboard Name="MyStoryboard">
-                                    <DoubleAnimation
-                                        Storyboard.TargetName="MyRectangle"
-                                        Storyboard.TargetProperty="(Canvas.Left)"
-                                        To="{Binding PositionX, NotifyOnTargetUpdated=True}"
-                                        Duration="0:0:1" />
-                                    <DoubleAnimation
-                                        Storyboard.TargetName="MyRectangle"
-                                        Storyboard.TargetProperty="(Canvas.Top)"
-                                        To="{Binding PositionY, NotifyOnTargetUpdated=True}"
-                                        Duration="0:0:1" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </Rectangle.Triggers>
-                </Rectangle>
-            </Canvas>
-        </StackPanel>
+        <TabControl>
+            <TabItem Header="Test header">
+                <TextBlock Text="Select All Controls tab item" />
+            </TabItem>
+            <TabItem Header="All controls">
+                <StackPanel>
+                    <local:ComboBoxWithButton ItemsSource="{Binding Collection}">
+                        <!--
+                            AdditionalButtonContent="Teeeext"
+                            AdditionalButtonCommand="{Binding SomeCommand}"
+                            ItemsSource="{Binding Collection}">
+                        -->
+                        <local:ComboBoxWithButton.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding .}" />
+                            </DataTemplate>
+                        </local:ComboBoxWithButton.ItemTemplate>
+                        <local:ComboBoxWithButton.AdditionalControl>
+                            <Button Command="{Binding SomeCommand}" Content="Check" />
+                        </local:ComboBoxWithButton.AdditionalControl>
+                    </local:ComboBoxWithButton>
+                    <local:Spinner
+                        Width="64"
+                        Height="64"
+                        Source="{StaticResource ResetImage}"
+                        Visibility="{Binding ElementName=toggle, Path=IsChecked, Converter={StaticResource boolToVisibilityConverter}}" />
+                    <ToggleButton
+                        Name="toggle"
+                        Height="20"
+                        IsChecked="true" />
+                    <local:SpinnerWithoutImage />
+                    <!--<local:ExpanderWithImage/>-->
+                    <TextBox />
+                    <local:TextBoxHint />
+                    <local:TextBoxHint AcceptsReturn="True" Hint="Filter" />
+                    <local:TextBoxHintWithClear HasClearButton="True" Hint="Filter with enabled clear button" />
+                    <local:TextBoxHintWithClear HasClearButton="False" Hint="Filter with disabled clear button" />
+                    <local:TextBoxHintWithClear
+                        AcceptsReturn="True"
+                        HasClearButton="True"
+                        Hint="Filter with enabled clear button and accepted return" />
+                    <ToggleButton x:Name="ToggleFlyoutButton" Content="Toggle flyout" />
+                    <!--  https://stackoverflow.com/questions/62711321/wpf-how-to-virtualize-itemscontrol  -->
+                    <ItemsControl MaxHeight="60">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Standard" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.Template>
+                            <ControlTemplate TargetType="ItemsControl">
+                                <Border
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}">
+                                    <ScrollViewer
+                                        Padding="{TemplateBinding Padding}"
+                                        CanContentScroll="True"
+                                        Focusable="False">
+                                        <ItemsPresenter />
+                                    </ScrollViewer>
+                                </Border>
+                            </ControlTemplate>
+                        </ItemsControl.Template>
+                        <ListBoxItem>
+                            <Button Content="1" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Height="30" Content="2" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Height="40" Content="3" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="4" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Height="40" Content="5" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="6" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Height="50" Content="7" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button Content="8" />
+                        </ListBoxItem>
+                    </ItemsControl>
+                    <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" />
+                    <ListBox ItemsSource="{Binding HeroesCollection}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    local:TextBlockHighlighter.Forecolor="Teal"
+                                    local:TextBlockHighlighter.HighlightColor="LightGreen"
+                                    local:TextBlockHighlighter.Selection="{Binding Data.Filter, Mode=OneWay, Source={StaticResource Proxy}}"
+                                    Text="{Binding Path=.}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Slider
+                        Maximum="500"
+                        Minimum="0"
+                        TickFrequency="1"
+                        Value="{Binding PositionX}" />
+                    <Slider
+                        Maximum="500"
+                        Minimum="0"
+                        TickFrequency="1"
+                        Value="{Binding PositionY}" />
+                    <TextBox Text="{Binding PositionX, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox Text="{Binding PositionY, UpdateSourceTrigger=PropertyChanged}" />
+                    <Canvas>
+                        <Rectangle
+                            Name="MyRectangle"
+                            Canvas.Left="0"
+                            Canvas.Top="0"
+                            Width="50"
+                            Height="50"
+                            Fill="Blue">
+                            <Rectangle.Triggers>
+                                <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                                    <BeginStoryboard>
+                                        <Storyboard Name="MyStoryboard">
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="MyRectangle"
+                                                Storyboard.TargetProperty="(Canvas.Left)"
+                                                To="{Binding PositionX, NotifyOnTargetUpdated=True}"
+                                                Duration="0:0:1" />
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="MyRectangle"
+                                                Storyboard.TargetProperty="(Canvas.Top)"
+                                                To="{Binding PositionY, NotifyOnTargetUpdated=True}"
+                                                Duration="0:0:1" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Rectangle.Triggers>
+                        </Rectangle>
+                    </Canvas>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
